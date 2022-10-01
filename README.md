@@ -7,7 +7,7 @@ Inspired by [Budou](https://github.com/google/budou).
 ```sh
 # development
 pnpm i
-npm run sudachi:build
+make sudachi
 npm run dev
 
 # deploy

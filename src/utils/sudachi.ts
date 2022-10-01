@@ -30,7 +30,7 @@ export async function setup() {
 }
 
 //
-// sudachi cli wrapper
+// sudachi cli wrapper (TODO: to save resouce, reuse single sudachi process cf. https://github.com/hi-ogawa/mecab-segmenter/pull/2)
 //
 
 export async function run(source: string): Promise<Token[]> {
