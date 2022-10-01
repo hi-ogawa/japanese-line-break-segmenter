@@ -2,7 +2,7 @@ name: ci
 "on":
   - push
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -15,10 +15,17 @@ jobs:
       - run: pnpm i --frozen-lockfile
       - run: npm run lint:check
       - run: npm run tsc
-      - run: npm run rakkas:build
 
-  sudachi:
+  build:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: "7.12.1"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16.16.0"
       - run: make sudachi
+      - run: pnpm i --frozen-lockfile
+      - run: npm run build
