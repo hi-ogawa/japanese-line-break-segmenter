@@ -4,7 +4,7 @@ Segment Japanese sentences into chunks where line-break is appropriate.
 [sudachi.rs](https://github.com/WorksApplications/sudachi.rs) is used to analyze sentences.
 Inspired by [Budou](https://github.com/google/budou).
 
-![image](https://user-images.githubusercontent.com/4232207/193414977-f1d4a7c4-a238-41e1-83cd-e50fb3cc3267.png)
+![image](https://user-images.githubusercontent.com/4232207/193416298-6ae52988-d8e4-4616-a75e-8ee0be9a1f2a.png)
 
 ```sh
 # development

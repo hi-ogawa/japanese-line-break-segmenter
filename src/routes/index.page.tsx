@@ -21,8 +21,8 @@ export default function PageComponent() {
   });
 
   return (
-    <div className="h-full flex flex-col items-center p-3">
-      <div className="w-2xl max-w-full flex flex-col gap-3 p-3 px-6">
+    <div className="h-full flex flex-col items-center p-6">
+      <div className="w-2xl max-w-full flex flex-col gap-3">
         <div className="flex items-center gap-2 mb-3">
           <h1 className="text-xl">Japanese Sentence Line Break Segmentation</h1>
           <a
@@ -57,7 +57,7 @@ export default function PageComponent() {
           </div>
           <textarea
             className="p-1 border"
-            rows={5}
+            rows={3}
             {...form.register("source")}
           />
         </div>
@@ -69,7 +69,7 @@ export default function PageComponent() {
             )}
           </div>
           {/* TODO: different output mode: pre, span, inline style */}
-          <pre className="p-1 border bg-white min-h-[300px]">
+          <pre className="p-1 border bg-white min-h-[200px]">
             {query.isSuccess && query.data.text}
           </pre>
         </div>
@@ -77,28 +77,28 @@ export default function PageComponent() {
           <div className="flex items-center gap-3">
             <label>Detail</label>
           </div>
-          <div className="p-1 border bg-white">
-            <table className="w-full">
-              <thead>
-                <tr>
-                  <th>text</th>
-                  <th>pos</th>
-                  <th>tags</th>
-                </tr>
-              </thead>
-              {query.isSuccess && (
-                <tbody>
-                  {query.data?.tokens.map((token) => (
-                    <tr key={JSON.stringify(token)}>
-                      <td>{token.text}</td>
-                      <td>{token.pos}</td>
-                      <td>{token.tags.slice(1).join(", ")}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              )}
-            </table>
-          </div>
+          <table className="w-full border bg-white">
+            <thead>
+              <tr className="px-2 border-b">
+                <th className="px-2 py-1 text-left uppercase">text</th>
+                <th className="px-2 py-1 text-left uppercase">pos</th>
+                <th className="px-2 py-1 text-left uppercase">tags</th>
+              </tr>
+            </thead>
+            {query.isSuccess && (
+              <tbody>
+                {query.data?.tokens.map((token) => (
+                  <tr key={JSON.stringify(token)} className="border-t">
+                    <td className="px-2 py-1">{token.text}</td>
+                    <td className="px-2 py-1">{token.pos}</td>
+                    <td className="px-2 py-1">
+                      {token.tags.slice(1).join(", ")}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
+          </table>
         </div>
       </div>
     </div>
