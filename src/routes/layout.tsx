@@ -9,7 +9,7 @@ export default function Layout(props: React.PropsWithChildren) {
   return (
     <>
       <Head title="Sudachi" />
-      <Providers>{props.children}</Providers>;
+      <Providers>{props.children}</Providers>
     </>
   );
 }
