@@ -33,10 +33,15 @@ export async function setup() {
 // sudachi cli wrapper (TODO: to save resouce, reuse single sudachi process cf. https://github.com/hi-ogawa/mecab-segmenter/pull/2)
 //
 
-export async function run(source: string): Promise<Token[]> {
+interface Output {
+  tokens: Token[];
+  sudachiOutput: string; // raw output of sudachi cli
+}
+
+export async function run(source: string): Promise<Output> {
   const { stdout } = await execCommand(SUDACHI_COMMAND, source);
   const lines = stdout.split("\n").slice(0, -2);
-  return lines.map((line) => {
+  const tokens = lines.map((line) => {
     const [text, rawTags] = line.split("\t");
     tinyassert(text);
     tinyassert(rawTags);
@@ -49,6 +54,7 @@ export async function run(source: string): Promise<Token[]> {
       tags,
     };
   });
+  return { tokens, sudachiOutput: stdout };
 }
 
 //

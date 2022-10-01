@@ -4,16 +4,18 @@ import { segmentTokens } from "../../utils/segment";
 import * as sudachi from "../../utils/sudachi";
 import type { Token } from "../../utils/types";
 
-interface SegmentResponse {
+export interface SegmentResponse {
   tokens: Token[];
   segments: Token[][];
   text: string;
+  sudachiOutput: string;
 }
 
 export async function post(ctx: RequestContext) {
   await sudachi.setup();
-  const source = await ctx.request.text();
-  const tokens = await sudachi.run(source);
+  let source = await ctx.request.text();
+  source = source.replaceAll(/\s/g, " "); // normalize white space since new lines would break sudachi
+  const { tokens, sudachiOutput } = await sudachi.run(source);
   const segments = segmentTokens(tokens);
   const text = segments
     .map((seg) => seg.map((tok) => tok.text).join(""))
@@ -22,6 +24,7 @@ export async function post(ctx: RequestContext) {
     tokens,
     segments,
     text,
+    sudachiOutput,
   };
   return json(res);
 }

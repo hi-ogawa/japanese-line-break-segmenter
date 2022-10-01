@@ -24,8 +24,6 @@ export function segmentTokens(tokens: Token[]): Token[][] {
 const POS_FORWARD = ["接頭辞", "連体詞"];
 const POS_BACKWARD = ["助詞", "助動詞", "接尾辞"];
 const POS_PAIRS = [["名詞", "名詞"]];
-const TAG_FORWARD = ["括弧開"];
-const TAG_BACKWARD = ["括弧閉"];
 
 function checkDependency(t1: Token, t2: Token): boolean {
   return checkForward(t1) || checkBackward(t2) || checkPair(t1, t2);
@@ -34,14 +32,14 @@ function checkDependency(t1: Token, t2: Token): boolean {
 function checkForward(t: Token): boolean {
   return (
     POS_FORWARD.includes(t.pos) ||
-    t.tags.some((tag) => TAG_FORWARD.includes(tag))
+    (t.pos === "補助記号" && t.tags.includes("括弧開"))
   );
 }
 
 function checkBackward(t: Token): boolean {
   return (
     POS_BACKWARD.includes(t.pos) ||
-    t.tags.some((tag) => TAG_BACKWARD.includes(tag))
+    (t.pos === "補助記号" && !t.tags.includes("括弧開"))
   );
 }
 
