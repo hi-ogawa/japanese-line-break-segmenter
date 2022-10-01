@@ -17,9 +17,8 @@ vercel link -p line-break-segmenter-hiro18181
 npm run build
 npm run deploy:production
 
-# examples
-curl http://localhost:3333/api/segment --data-binary 'テクノロジーの力であらゆる投資判断を支援する'
-curl https://line-break-segmenter-hiro18181.vercel.app/api/segment --data-binary 'テクノロジーの力であらゆる投資判断を支援する'
+# example
+curl https://line-break-segmenter-hiro18181.vercel.app/api/segment --data-binary 'テクノロジーの力であらゆる投資判断を支援する' | jq -r '.text'
 テクノロジーの
 力で
 あらゆる投資判断を
