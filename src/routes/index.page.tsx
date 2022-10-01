@@ -80,14 +80,16 @@ export default function PageComponent() {
           <div className="p-1 border bg-white">
             <table className="w-full">
               <thead>
-                <th>text</th>
-                <th>pos</th>
-                <th>tags</th>
+                <tr>
+                  <th>text</th>
+                  <th>pos</th>
+                  <th>tags</th>
+                </tr>
               </thead>
               {query.isSuccess && (
                 <tbody>
                   {query.data?.tokens.map((token) => (
-                    <tr>
+                    <tr key={JSON.stringify(token)}>
                       <td>{token.text}</td>
                       <td>{token.pos}</td>
                       <td>{token.tags.slice(1).join(", ")}</td>
