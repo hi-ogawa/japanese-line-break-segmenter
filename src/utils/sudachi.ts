@@ -1,10 +1,10 @@
 import child_process from "node:child_process";
-import { Readable } from "node:stream";
-import { tinyassert } from "./tinyassert";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { Readable } from "node:stream";
 import tar from "tar";
+import { tinyassert } from "./tinyassert";
 import type { Token } from "./types";
 
 //
