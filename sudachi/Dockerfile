@@ -1,9 +1,7 @@
 FROM ekidd/rust-musl-builder:1.57.0
 
-WORKDIR /app
-
 RUN git clone --depth 1 https://github.com/WorksApplications/sudachi.rs.git
-WORKDIR /app/sudachi.rs
+WORKDIR sudachi.rs
 
 RUN cargo build --release
 
