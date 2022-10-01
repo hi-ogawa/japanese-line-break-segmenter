@@ -1,8 +1,8 @@
 # japanese-line-break-segmenter
 
-Segment Japanese sentence into chunks where line-break is appropriate.
+Segment Japanese sentences into chunks where line-break is appropriate.
+[sudachi.rs](https://github.com/WorksApplications/sudachi.rs) is used to analyze sentences.
 Inspired by [Budou](https://github.com/google/budou).
-Using [sudachi.rs](https://github.com/WorksApplications/sudachi.rs).
 
 ```sh
 # development
@@ -20,10 +20,9 @@ npm run deploy:production
 # examples
 curl http://localhost:3333/api/segment --data-binary 'テクノロジーの力であらゆる投資判断を支援する'
 curl https://line-break-segmenter-hiro18181.vercel.app/api/segment --data-binary 'テクノロジーの力であらゆる投資判断を支援する'
+テクノロジーの
+力で
+あらゆる投資判断を
+支援
+する
 ```
-
-## todo
-
-- [ ] port segmenter https://github.com/hi-ogawa/mecab-segmenter/blob/master/src/segmenter.py
-- [ ] frontend for demo
-- [ ] ci
