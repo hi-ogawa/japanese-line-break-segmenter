@@ -20,6 +20,11 @@ npm run deploy:production
 # examples
 curl http://localhost:3333/api/segment --data-binary 'テクノロジーの力であらゆる投資判断を支援する'
 curl https://line-break-segmenter-hiro18181.vercel.app/api/segment --data-binary 'テクノロジーの力であらゆる投資判断を支援する'
+テクノロジーの
+力で
+あらゆる投資判断を
+支援
+する
 ```
 
 ## todo

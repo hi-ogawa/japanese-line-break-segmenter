@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@hattip/response': ^0.0.17
   '@tsconfig/strictest': ^1.0.2
+  '@types/lodash': ^4.14.186
   '@types/node': ^16
   '@types/react': ^18.0.15
   '@types/react-dom': ^18.0.6
@@ -14,6 +15,7 @@ specifiers:
   eslint: ^8.20.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-import: ^2.26.0
+  lodash: ^4.17.21
   npm-run-all: ^4.1.5
   prettier: ^2.7.1
   rakkasjs: ^0.6.1
@@ -27,6 +29,7 @@ specifiers:
 
 dependencies:
   '@hattip/response': 0.0.17
+  lodash: 4.17.21
   rakkasjs: 0.6.1_ybgcg3idmzzljyut2yn4xh6foq
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -35,6 +38,7 @@ dependencies:
 
 devDependencies:
   '@tsconfig/strictest': 1.0.2
+  '@types/lodash': 4.14.186
   '@types/node': 16.11.62
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
@@ -522,6 +526,10 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/lodash/4.14.186:
+    resolution: {integrity: sha512-eHcVlLXP0c2FlMPm56ITode2AgLMSa6aJ05JTTbYbI+7EMkCEE5qk2E41d5g2lCVTqRe0GnnRFurmlCsDODrPw==}
     dev: true
 
   /@types/node/16.11.62:
@@ -2209,6 +2217,10 @@ packages:
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
+
+  /lodash/4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: false
 
   /loose-envify/1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
