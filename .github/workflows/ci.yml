@@ -23,7 +23,7 @@ jobs:
   #   fatal: could not create work tree dir 'sudachi.rs': Permission denied
   #   The command '/bin/sh -c git clone --depth 1 https://github.com/WorksApplications/sudachi.rs.git' returned a non-zero code: 128
   sudachi:
-    if: false
+    # if: false
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
