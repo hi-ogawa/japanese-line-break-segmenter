@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { Icon } from "../components/icon";
 import { Spinner } from "../components/spinner";
 import { fetchToJson } from "../utils/fetch-utils";
 import { useDebounce } from "../utils/hooks";
-import { icon } from "../utils/icon";
 import type { SegmentResponse } from "./api/segment.api";
 
 // TODO: message for unexpected error
@@ -27,12 +27,12 @@ export default function PageComponent() {
           <h1 className="text-xl">Japanese Sentence Line Break Segmentation</h1>
           <a
             className="opacity-[0.7] hover:opacity-100"
-            style={{ width: "24px", height: "24px" }}
             href="https://github.com/hi-ogawa/japanese-line-break-segmenter"
             target="_blank"
             rel="noopener noreferrer"
-            dangerouslySetInnerHTML={{ __html: icon("Logos/github-line") }}
-          />
+          >
+            <Icon className="w-6 h-6" name="Logos/github-fill" />
+          </a>
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex items-center justigap-3">
