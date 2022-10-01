@@ -14,7 +14,7 @@ export interface SegmentResponse {
 export async function post(ctx: RequestContext) {
   await sudachi.setup();
   let source = await ctx.request.text();
-  source = source.replaceAll(/\s/g, " "); // normalize white space since new lines would break sudachi)
+  source = source.replaceAll(/\s/g, " "); // normalize white space since new lines would break sudachi
   const { tokens, sudachiOutput } = await sudachi.run(source);
   const segments = segmentTokens(tokens);
   const text = segments
