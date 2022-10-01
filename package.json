@@ -1,5 +1,4 @@
 {
-  "name": "jp-sentence-segmenter",
   "type": "module",
   "scripts": {
     "dev": "run-p rakkas:dev tsc:dev",
