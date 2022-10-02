@@ -10,7 +10,7 @@ importers:
   .:
     specifiers:
       '@hattip/response': ^0.0.17
-      '@hiogawa/sudachi.js': workspace:*
+      '@hiogawa/sudachi.js': file:sudachi.js
       '@tanstack/react-query': ^4.8.0
       '@tanstack/react-query-devtools': ^4.8.0
       '@tsconfig/strictest': ^1.0.2
@@ -41,7 +41,7 @@ importers:
       vite-plugin-windicss: ^1.8.8
     dependencies:
       '@hattip/response': 0.0.17
-      '@hiogawa/sudachi.js': link:sudachi.js
+      '@hiogawa/sudachi.js': file:sudachi.js
       '@tanstack/react-query': 4.8.0_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.8.0_nscguit52pwjmvr4nqvhrqfsfq
       lodash: 4.17.21
@@ -3121,3 +3121,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  file:sudachi.js:
+    resolution: {directory: sudachi.js, type: directory}
+    name: '@hiogawa/sudachi.js'
+    dev: false

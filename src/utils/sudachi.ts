@@ -3,6 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { Readable } from "node:stream";
+import sudachiJs from "@hiogawa/sudachi.js";
 import tar from "tar";
 import { tinyassert } from "./tinyassert";
 import type { Token } from "./types";
@@ -19,7 +20,6 @@ const DIST_PATH = path.resolve(
 const SUDACHI_COMMAND = `${DIST_PATH}/sudachi-wrapper.sh`;
 
 export async function setup() {
-  const sudachiJs = await import("@hiogawa/sudachi.js");
   console.log(`sudachiJs.add(1, 2) = ${sudachiJs.add(1, 2)}`);
   if (!fs.existsSync(DIST_PATH)) {
     const cwd = path.resolve(DIST_PATH, "..");
