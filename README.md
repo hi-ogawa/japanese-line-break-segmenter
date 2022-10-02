@@ -1,7 +1,7 @@
 # japanese-line-break-segmenter
 
-Segment Japanese sentences into chunks where line-break is appropriate.
-[sudachi.rs](https://github.com/WorksApplications/sudachi.rs) is used to analyze sentences.
+Segment Japanese sentences into chunks where line-break is appropriate. \
+[sudachi.rs](https://github.com/WorksApplications/sudachi.rs) is used to analyze sentences (see nodejs binding [sudachi.js](https://github.com/hi-ogawa/japanese-line-break-segmenter/blob/master/sudachi.js/README.md)). \
 Inspired by [Budou](https://github.com/google/budou).
 
 ![image](https://user-images.githubusercontent.com/4232207/193416298-6ae52988-d8e4-4616-a75e-8ee0be9a1f2a.png)
