@@ -2,7 +2,6 @@
 
 ## todo
 
-- bundle resources
 - explore wasm binding (and run it on browser)
 
 ## example
