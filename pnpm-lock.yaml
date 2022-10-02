@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 patchedDependencies:
   rakkasjs@0.6.1:
-    hash: z4yg3vrcdubd6f2ntmbquu3rca
+    hash: hnnwwyxtkwgnfxjxz4vkw3gaym
     path: patches/rakkasjs@0.6.1.patch
 
 importers:
@@ -45,7 +45,7 @@ importers:
       '@tanstack/react-query': 4.8.0_biqbaboplfbrettd7655fr4n2y
       '@tanstack/react-query-devtools': 4.8.0_nscguit52pwjmvr4nqvhrqfsfq
       lodash: 4.17.21
-      rakkasjs: 0.6.1_z4yg3vrcdubd6f2ntmbquu3rca_ybgcg3idmzzljyut2yn4xh6foq
+      rakkasjs: 0.6.1_hnnwwyxtkwgnfxjxz4vkw3gaym_ybgcg3idmzzljyut2yn4xh6foq
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-hook-form: 7.36.1_react@18.2.0
@@ -2603,7 +2603,7 @@ packages:
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  /rakkasjs/0.6.1_z4yg3vrcdubd6f2ntmbquu3rca_ybgcg3idmzzljyut2yn4xh6foq:
+  /rakkasjs/0.6.1_hnnwwyxtkwgnfxjxz4vkw3gaym_ybgcg3idmzzljyut2yn4xh6foq:
     resolution: {integrity: sha512-Pz2DzMuIEW+JmfkLSGwvOOlaZOnapRBf2MdwekI7bR4Sdrs31P1BIwy987dzoReyie61a1kBV76NNVacDjwNgg==}
     hasBin: true
     peerDependencies:

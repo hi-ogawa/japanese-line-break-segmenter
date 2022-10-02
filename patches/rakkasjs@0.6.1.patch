@@ -13,7 +13,7 @@ index 8a7453510a6878d98114ffa146ccc7808c6cee68..54cd6afd5972e4ecc53d5dab923fc127
  }
  export {
 diff --git a/dist/vite-plugin.js b/dist/vite-plugin.js
-index 3b8f930d7c41e442d887333f639e7578f9173d10..a5d14cc0c4024640efab36ff63b5793e54e22354 100644
+index 3b8f930d7c41e442d887333f639e7578f9173d10..427d232429130998ae361541ed14f34537d0f614 100644
 --- a/dist/vite-plugin.js
 +++ b/dist/vite-plugin.js
 @@ -958,7 +958,8 @@ var adapters = {
@@ -32,7 +32,7 @@ index 3b8f930d7c41e442d887333f639e7578f9173d10..a5d14cc0c4024640efab36ff63b5793e
            options.define["process.env.RAKKAS_PRERENDER"] = "undefined";
 +          options.external = [
 +            ...(options.external ?? []),
-+            ...(config.ssr.external ?? []),
++            ...(config.build.rollupOptions.external ?? []),
 +          ]
          }
        });
