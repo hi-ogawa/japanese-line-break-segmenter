@@ -10,9 +10,9 @@
 ```js
 const { SudachiJs } = require("./index.js");
 const sudachi = SudachiJs.create(
-  "../sudachi/dist/resources/sudachi.json",
-  "../sudachi/dist/resources",
-  "../sudachi/dist/resources/system.dic"
+  "./resources/sudachi.json",
+  "./resources",
+  "./resources/system.dic"
 );
 console.log(sudachi.run("仮想通貨の確定申告もこれで安心"));
 // [
