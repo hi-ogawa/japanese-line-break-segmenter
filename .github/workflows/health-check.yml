@@ -1,0 +1,13 @@
+# warm up lambda by cron job
+name: health-check
+"on":
+  # run every 15 minutes
+  schedule:
+    - cron: "*/15 * * * *"
+jobs:
+  health-check:
+    runs-on: ubuntu-20.04
+    container:
+      image: badouralix/curl-jq
+    steps:
+      - run: curl -s -f https://line-break-segmenter-hiro18181.vercel.app/api/segment --data-binary '検索は次の言語でもご利用いただけます' | jq -r --exit-status '.text'
