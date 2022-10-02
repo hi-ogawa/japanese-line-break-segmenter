@@ -1,4 +1,5 @@
 import { json } from "@hattip/response";
+import type { MorphemeJs } from "@hiogawa/sudachi.js";
 import type { RequestContext } from "rakkasjs";
 import { segmentTokens } from "../../utils/segment";
 import * as sudachi from "../../utils/sudachi";
@@ -8,23 +9,23 @@ export interface SegmentResponse {
   tokens: Token[];
   segments: Token[][];
   text: string;
-  sudachiOutput: string;
+  morphemes: MorphemeJs[];
 }
 
 export async function post(ctx: RequestContext) {
-  await sudachi.setup();
   let source = await ctx.request.text();
   source = source.replaceAll(/\s/g, " "); // normalize white space since new lines would break sudachi
-  const { tokens, sudachiOutput } = await sudachi.run(source);
+  const morphemes = await sudachi.run(source);
+  const tokens = morphemes.map(sudachi.morphmeToToken);
   const segments = segmentTokens(tokens);
   const text = segments
     .map((seg) => seg.map((tok) => tok.text).join(""))
     .join("\n");
   const res: SegmentResponse = {
+    morphemes,
     tokens,
     segments,
     text,
-    sudachiOutput,
   };
   return json(res);
 }

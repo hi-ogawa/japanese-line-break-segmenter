@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@hattip/response": "^0.0.17",
-    "@hiogawa/sudachi.js": "file:sudachi.js",
+    "@hiogawa/sudachi.js": "link:sudachi.js",
     "@tanstack/react-query": "^4.8.0",
     "@tanstack/react-query-devtools": "^4.8.0",
     "lodash": "^4.17.21",

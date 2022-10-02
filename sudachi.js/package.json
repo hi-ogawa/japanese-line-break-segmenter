@@ -6,7 +6,7 @@
   "types": "./index.d.ts",
   "scripts": {
     "clean": "rm -rf index.*.node",
-    "build": "npm run napi:docker && npm run strip",
+    "build": "npm run resources:build && npm run napi:docker && npm run strip",
     "napi": "napi build --platform --release",
     "napi:dev": "napi build --platform",
     "napi:docker": "docker-compose build napi-rs && docker-compose run -T --rm napi-rs cat index.linux-x64-gnu.node > index.linux-x64-gnu.node",
