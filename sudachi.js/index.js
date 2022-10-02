@@ -240,7 +240,6 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`);
 }
 
-const { add, SudachiJs } = nativeBinding;
+const { SudachiJs } = nativeBinding;
 
-module.exports.add = add;
 module.exports.SudachiJs = SudachiJs;
