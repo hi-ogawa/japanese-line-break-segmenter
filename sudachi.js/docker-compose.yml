@@ -1,0 +1,9 @@
+services:
+  napi-rs:
+    build:
+      context: ./
+
+  resources:
+    build:
+      context: ./
+      dockerfile: Dockerfile.resources

@@ -1,0 +1,10 @@
+# fat but convenient circleci ubuntu
+FROM cimg/base:2022.09
+
+RUN wget https://github.com/WorksApplications/sudachi.rs/archive/refs/tags/v0.6.6.tar.gz
+RUN tar -xzvf v0.6.6.tar.gz
+WORKDIR sudachi.rs-0.6.6
+
+RUN curl -L http://sudachi.s3-website-ap-northeast-1.amazonaws.com/sudachidict/sudachi-dictionary-20220519-small.zip > sudachi-dictionary-20220519-small.zip
+RUN unzip sudachi-dictionary-20220519-small.zip
+RUN mv sudachi-dictionary-20220519/system_small.dic resources/system.dic

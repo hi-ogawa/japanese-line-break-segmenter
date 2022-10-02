@@ -1,0 +1,39 @@
+diff --git a/dist/build-V3FLOOYQ.js b/dist/build-V3FLOOYQ.js
+index 8a7453510a6878d98114ffa146ccc7808c6cee68..54cd6afd5972e4ecc53d5dab923fc127bb99977b 100644
+--- a/dist/build-V3FLOOYQ.js
++++ b/dist/build-V3FLOOYQ.js
+@@ -62,7 +62,8 @@ async function build(root, options) {
+   }
+   if (adapter.bundle) {
+     logStep(step++, `Bundling for ${adapter.name}`);
+-    await adapter.bundle(config.root);
++    // https://github.com/rakkasjs/rakkasjs/blob/9afa414dfe757662bd500aaf73cbd4ff1f58b029/packages/rakkasjs/src/cli/build.ts#L79
++    await adapter.bundle(config.root, config);
+   }
+ }
+ export {
+diff --git a/dist/vite-plugin.js b/dist/vite-plugin.js
+index 3b8f930d7c41e442d887333f639e7578f9173d10..427d232429130998ae361541ed14f34537d0f614 100644
+--- a/dist/vite-plugin.js
++++ b/dist/vite-plugin.js
+@@ -958,7 +958,8 @@ var adapters = {
+   vercel: {
+     name: "vercel",
+     disableStreaming: true,
+-    async bundle(root) {
++    // https://github.com/rakkasjs/rakkasjs/blob/9afa414dfe757662bd500aaf73cbd4ff1f58b029/packages/rakkasjs/src/vite-plugin/adapters.ts#L51
++    async bundle(root, config) {
+       let entry = findEntry(root, "src/entry-vercel");
+       if (!entry) {
+         entry = path5.resolve(root, "dist/server/entry-vercel.js");
+@@ -971,6 +972,10 @@ var adapters = {
+           options.define = options.define || {};
+           options.define["process.env.NODE_ENV"] = '"production"';
+           options.define["process.env.RAKKAS_PRERENDER"] = "undefined";
++          options.external = [
++            ...(options.external ?? []),
++            ...(config.build.rollupOptions.external ?? []),
++          ]
+         }
+       });
+     }
