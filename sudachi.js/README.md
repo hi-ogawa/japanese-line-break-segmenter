@@ -1,5 +1,10 @@
 # sudachi nodejs binding
 
+## todo
+
+- bundle resources
+- explore wasm binding (and run it on browser)
+
 ## example
 
 ```js
@@ -62,4 +67,3 @@ console.log(sudachi.run("仮想通貨の確定申告もこれで安心"));
 ## references
 
 - https://github.com/napi-rs/napi-rs
-  - https://napi.rs/docs/cli/build

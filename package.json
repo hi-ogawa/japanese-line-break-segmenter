@@ -10,7 +10,6 @@
     "deploy:production": "vercel deploy --prebuilt . --prod",
     "rakkas:dev": "rakkas --no-clearScreen --port 3333",
     "rakkas:build": "rakkas build",
-    "sudachi:build": "bash sudachi/build.sh",
     "lint": "run-s prettier eslint",
     "lint:check": "run-s prettier:check eslint:check",
     "eslint": "npm run eslint:check -- --fix",

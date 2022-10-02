@@ -11,8 +11,3 @@ vercel-copy-files:
 	cp -f node_modules/@hiogawa/sudachi.js/{package.json,index.js,index.linux-x64-gnu.node} .vercel/output/functions/index.func/node_modules/@hiogawa/sudachi.js
 	cp -f misc/vercel/config.json .vercel/output/config.json
 	cp -f misc/vercel/.vc-config.json .vercel/output/functions/index.func/.vc-config.json
-
-sudachi:
-	cd sudachi && \
-	docker-compose build bundler && \
-	docker-compose run --rm -T bundler tar -czvf - dist > dist.tar.gz

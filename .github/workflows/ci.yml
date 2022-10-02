@@ -26,6 +26,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16.16.0"
-      - run: make sudachi
+      - run: npm -C sudachi.js run build
       - run: pnpm i --frozen-lockfile
       - run: npm run build

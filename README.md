@@ -8,8 +8,8 @@ Inspired by [Budou](https://github.com/google/budou).
 
 ```sh
 # development
+npm -C sudachi.js run build # TODO: pre-build or publish since this is too slow initially
 pnpm i
-make sudachi
 npm run dev
 
 # deploy
