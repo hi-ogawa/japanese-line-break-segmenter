@@ -25,7 +25,10 @@ type IconName = HackIconName<keyof typeof glob>;
 
 const glob = (import.meta.glob as HackGlob)(
   // https://remixicon.com/
-  ["remixicon/icons/Logos/github-fill.svg"] as const,
+  [
+    "remixicon/icons/Logos/github-fill.svg",
+    "remixicon/icons/System/error-warning-line.svg",
+  ] as const,
   {
     as: "raw",
     eager: true,

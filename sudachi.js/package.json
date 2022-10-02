@@ -1,0 +1,17 @@
+{
+  "name": "@hiogawa/sudachi.js",
+  "private": true,
+  "module": "commonjs",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "scripts": {
+    "clean": "rm -rf index.js inde.d.ts index.*.node",
+    "build": "echo TODO 'napi build' in docker?",
+    "build:local": "napi build --platform",
+    "// https://github.com/napi-rs/napi-rs/issues/1249": "",
+    "rebuild": "touch src/lib.rs"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2.11.4"
+  }
+}

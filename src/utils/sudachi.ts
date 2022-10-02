@@ -19,6 +19,8 @@ const DIST_PATH = path.resolve(
 const SUDACHI_COMMAND = `${DIST_PATH}/sudachi-wrapper.sh`;
 
 export async function setup() {
+  const sudachiJs = await import("@hiogawa/sudachi.js");
+  console.log(`sudachiJs.add(1, 2) = ${sudachiJs.add(1, 2)}`);
   if (!fs.existsSync(DIST_PATH)) {
     const cwd = path.resolve(DIST_PATH, "..");
     await fs.promises.mkdir(cwd, { recursive: true });

@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Head } from "rakkasjs";
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import "virtual:windi.css";
 import "../styles/index.css";
 
@@ -9,7 +10,10 @@ export default function Layout(props: React.PropsWithChildren) {
   return (
     <>
       <Head title="Sudachi" />
-      <Providers>{props.children}</Providers>
+      <Providers>
+        {props.children}
+        <Toaster />
+      </Providers>
     </>
   );
 }

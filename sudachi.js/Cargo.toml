@@ -1,0 +1,15 @@
+[package]
+name = "sudachi-js"
+version = "0.0.1"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+sudachi = { git = "https://github.com/WorksApplications/sudachi.rs.git", tag = "v0.6.6" }
+napi = "2"
+napi-derive = "2"
+
+[build-dependencies]
+napi-build = "1"

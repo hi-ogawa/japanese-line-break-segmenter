@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast"; // using default export breaks vite/rakkas
 import { Icon } from "../components/icon";
 import { Spinner } from "../components/spinner";
 import { fetchToJson } from "../utils/fetch-utils";
 import { useDebounce } from "../utils/hooks";
 import type { SegmentResponse } from "./api/segment.api";
 
-// TODO: message for unexpected error
 // TODO: format the output as span with inline style
 
 export default function PageComponent() {
@@ -17,7 +17,11 @@ export default function PageComponent() {
   // query
   const debounce = useDebounce(source, 500);
   const query = useSegmentApi(debounce.data, {
-    onError: () => {},
+    onError: () => {
+      toast.error("failed to process input. please try it again later.", {
+        id: `${useSegmentApi.name}:error`,
+      });
+    },
   });
 
   return (
@@ -62,10 +66,16 @@ export default function PageComponent() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <label>Output</label>
             {(query.isFetching || debounce.isLoading) && (
               <Spinner size="18px" />
+            )}
+            {query.isError && (
+              <Icon
+                name="System/error-warning-line"
+                className="w-5 h-5 fill-red-500"
+              />
             )}
           </div>
           {/* TODO: different output mode: pre, span, inline style */}
