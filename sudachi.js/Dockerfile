@@ -19,7 +19,7 @@ RUN cargo install cargo-chef@0.1.45
 
 FROM stage_cargo_chef as stage_prepare
 
-COPY . .
+COPY ./ ./
 RUN cargo chef prepare --recipe-path recipe.json
 
 #
@@ -28,11 +28,11 @@ RUN cargo chef prepare --recipe-path recipe.json
 
 FROM stage_cargo_chef as stage_build
 
-COPY --from=stage_prepare /app/recipe.json .
+COPY --from=stage_prepare /app/recipe.json ./
 RUN cargo chef cook --release --recipe-path recipe.json
 
-COPY package.json package-lock.json .
+COPY package.json package-lock.json ./
 RUN npm i
 
-COPY . .
+COPY ./ ./
 RUN npm run napi
