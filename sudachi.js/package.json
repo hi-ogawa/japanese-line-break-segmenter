@@ -10,6 +10,7 @@
     "napi": "napi build --platform --release",
     "napi:dev": "napi build --platform",
     "napi:docker": "docker-compose build napi-rs && docker-compose run -T --rm napi-rs cat index.linux-x64-gnu.node > index.linux-x64-gnu.node",
+    "resources:build": "docker-compose build resources && docker-compose run -T --rm resources tar -czvf - resources > resources.tar.gz",
     "strip": "strip *.node",
     "// https://github.com/napi-rs/napi-rs/issues/1249": "",
     "rebuild": "touch src/lib.rs"
