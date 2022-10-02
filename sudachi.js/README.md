@@ -2,6 +2,7 @@
 
 ## todo
 
+- improve build time on CI
 - explore wasm binding (and run it on browser)
 
 ## example
