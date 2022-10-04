@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "npx wasm-pack build --target no-modules"
+  },
   "devDependencies": {
     "wasm-pack": "^0.10.3"
   }

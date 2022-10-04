@@ -1,9 +1,19 @@
 # sudachi wasm binding
 
+- build
+
 ```sh
 npm i
-npx wasm-pack build --target no-modules
-cargo build --lib --target wasm32-unknown-unknown # directly with cargo?
+npm run build
+```
+
+- example
+
+```js
+const wasmSource = await fs.promises.readFile("./pkg/sudachi_wasm_bg.wasm");
+const wasm = await WebAssembly.compile(wasmSource);
+const instance = await WebAssembly.instantiate(wasm, { wbg: {} });
+console.log(instance.exports.add(1, 2));
 ```
 
 ## references
