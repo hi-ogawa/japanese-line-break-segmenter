@@ -7,9 +7,5 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-sudachi = { git = "https://github.com/hi-ogawa/sudachi.rs.git", branch = "feat-wasm-build" }
+sudachi = { path = "../sudachi.rs/sudachi" }
 wasm-bindgen = "0.2.83"
-
-# for local dev (TODO: maybe use git submodule?)
-# [patch."https://github.com/hi-ogawa/sudachi.rs.git"]
-# sudachi = { path = "../../../others/sudachi.rs/sudachi" }

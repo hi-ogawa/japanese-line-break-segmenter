@@ -1,0 +1,3 @@
+[submodule "sudachi.rs"]
+	path = sudachi.rs
+	url = git@github.com:hi-ogawa/sudachi.rs.git
