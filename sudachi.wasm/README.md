@@ -8,12 +8,66 @@ npm run build
 ```
 
 - example
+  - requires adding `"type": "module"` in `pkg/package.json`
 
 ```js
 const wasmSource = await fs.promises.readFile("./pkg/sudachi_wasm_bg.wasm");
-const wasm = await WebAssembly.compile(wasmSource);
-const instance = await WebAssembly.instantiate(wasm, { wbg: {} });
-console.log(instance.exports.add(1, 2));
+const wasmModule = await WebAssembly.compile(wasmSource);
+const sudachiWasm = await import("./pkg/sudachi_wasm.js");
+sudachiWasm.initSync(wasmModule);
+sudachiWasm.tokenize("テクノロジーの力であらゆる投資判断を支援する");
+// [
+//   {
+//     surface: 'テクノロジー',
+//     part_of_speech: [ '名詞', '普通名詞', '一般', '*', '*', '*' ],
+//     normalized_form: 'テクノロジー'
+//   },
+//   {
+//     surface: 'の',
+//     part_of_speech: [ '助詞', '格助詞', '*', '*', '*', '*' ],
+//     normalized_form: 'の'
+//   },
+//   {
+//     surface: '力',
+//     part_of_speech: [ '名詞', '普通名詞', '一般', '*', '*', '*' ],
+//     normalized_form: '力'
+//   },
+//   {
+//     surface: 'で',
+//     part_of_speech: [ '助詞', '格助詞', '*', '*', '*', '*' ],
+//     normalized_form: 'で'
+//   },
+//   {
+//     surface: 'あらゆる',
+//     part_of_speech: [ '連体詞', '*', '*', '*', '*', '*' ],
+//     normalized_form: 'あらゆる'
+//   },
+//   {
+//     surface: '投資',
+//     part_of_speech: [ '名詞', '普通名詞', 'サ変可能', '*', '*', '*' ],
+//     normalized_form: '投資'
+//   },
+//   {
+//     surface: '判断',
+//     part_of_speech: [ '名詞', '普通名詞', 'サ変可能', '*', '*', '*' ],
+//     normalized_form: '判断'
+//   },
+//   {
+//     surface: 'を',
+//     part_of_speech: [ '助詞', '格助詞', '*', '*', '*', '*' ],
+//     normalized_form: 'を'
+//   },
+//   {
+//     surface: '支援',
+//     part_of_speech: [ '名詞', '普通名詞', 'サ変可能', '*', '*', '*' ],
+//     normalized_form: '支援'
+//   },
+//   {
+//     surface: 'する',
+//     part_of_speech: [ '動詞', '非自立可能', '*', '*', 'サ行変格', '終止形-一般' ],
+//     normalized_form: '為る'
+//   }
+// ]
 ```
 
 ## references

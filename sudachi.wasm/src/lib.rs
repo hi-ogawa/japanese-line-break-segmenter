@@ -14,12 +14,7 @@ use sudachi::{
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn add(a: u32, b: u32) -> u32 {
-    a + b
-}
-
-#[wasm_bindgen]
-pub fn run_example(input: String) -> Result<JsValue, JsValue> {
+pub fn tokenize(input: String) -> Result<JsValue, JsValue> {
     // initialize dictionary
     let dict = create_dictionary().map_err(serde_wasm_bindgen::Error::new)?;
 
@@ -48,17 +43,20 @@ pub struct MorphemeJs {
     pub normalized_form: String,
 }
 
+// TODO: make it loadable from js (hopefully without copy)
+const SYSTEM_DICT_DATA: &[u8] = include_bytes!("../../sudachi.js/resources/system.dic");
+const CHARACTER_DEFINITION_DATA: &[u8] = include_bytes!("../../sudachi.js/resources/char.def");
+
 // create dictionary without accessing file system
 fn create_dictionary() -> Result<JapaneseDictionary, SudachiError> {
-    // todo: embed or pass data via arguments (maybe typed array?)
-    let storage = SudachiDicData::new(Storage::Owned(vec![]));
+    let storage = SudachiDicData::new(Storage::Borrowed(SYSTEM_DICT_DATA));
     let dict_data = unsafe { storage.system_static_slice() }; // get along with sudachi.rs's borrow hack
-    let character_category_data: Vec<u8> = vec![];
+    let character_category_data = CHARACTER_DEFINITION_DATA;
 
     // https://github.com/hi-ogawa/sudachi.rs/blob/f24627e74e79f597e3596cd148567c968cfa0230/sudachi/src/dic/mod.rs#L55
     let mut loaeded_dictionary = {
         let dictionary_loader = DictionaryLoader::read_system_dictionary(dict_data)?;
-        let character_category = CharacterCategory::from_reader(&character_category_data[..])?;
+        let character_category = CharacterCategory::from_reader(character_category_data)?;
 
         let mut grammar = dictionary_loader
             .grammar

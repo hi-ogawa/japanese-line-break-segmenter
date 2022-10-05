@@ -1,6 +1,7 @@
 {
+  "type": "module",
   "scripts": {
-    "build": "npx wasm-pack build --target no-modules"
+    "build": "wasm-pack build --target web"
   },
   "devDependencies": {
     "wasm-pack": "^0.10.3"
