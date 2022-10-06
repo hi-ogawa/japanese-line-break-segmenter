@@ -13,37 +13,71 @@ use sudachi::{
 };
 use wasm_bindgen::prelude::*;
 
+#[wasm_bindgen(typescript_custom_section)]
+const DTS_EXTRA: &'static str = r#"
+
+export class Tokenizer {
+    free(): void;
+    static create(): Tokenizer;
+    run(input: string, mode?: "A" | "B" | "C"): Morpheme[];
+}
+
+export interface Morpheme {
+    surface: string;
+    part_of_speech: string[];
+    normalized_form: string;
+}
+
+"#;
+
+#[wasm_bindgen(skip_typescript)]
+pub struct Tokenizer {
+    dict: JapaneseDictionary,
+}
+
 #[wasm_bindgen]
-pub fn tokenize(input: String) -> Result<JsValue, JsValue> {
-    // initialize dictionary
-    let dict = create_dictionary().map_err(serde_wasm_bindgen::Error::new)?;
+impl Tokenizer {
+    // TODO: receive dictionary data externally
+    #[wasm_bindgen]
+    pub fn create() -> Result<Tokenizer, JsValue> {
+        // initialize dictionary
+        let dict = create_dictionary().map_err(serde_wasm_bindgen::Error::new)?;
+        Ok(Self { dict })
+    }
 
-    // tokenize
-    let tokenizer = StatelessTokenizer::new(&dict);
-    let morphemes = tokenizer
-        .tokenize(&input, Mode::C, false)
-        .map_err(serde_wasm_bindgen::Error::new)?;
+    #[wasm_bindgen]
+    pub fn run(&self, input: String, mode: Option<String>) -> Result<JsValue, JsValue> {
+        let mode: Mode = mode
+            .unwrap_or("C".to_string())
+            .parse()
+            .map_err(serde_wasm_bindgen::Error::new)?;
 
-    // covert to js value
-    let result: Vec<MorphemeJs> = morphemes
-        .iter()
-        .map(|m| MorphemeJs {
-            surface: m.surface().to_string(),
-            part_of_speech: m.part_of_speech().iter().map(|v| v.to_string()).collect(),
-            normalized_form: m.normalized_form().to_string(),
-        })
-        .collect();
-    Ok(serde_wasm_bindgen::to_value(&result)?)
+        // tokenize
+        let tokenizer = StatelessTokenizer::new(&self.dict);
+        let morphemes = tokenizer
+            .tokenize(&input, mode, false)
+            .map_err(serde_wasm_bindgen::Error::new)?;
+
+        // covert to js value
+        let result: Vec<Morpheme> = morphemes
+            .iter()
+            .map(|m| Morpheme {
+                surface: m.surface().to_string(),
+                part_of_speech: m.part_of_speech().iter().map(|v| v.to_string()).collect(),
+                normalized_form: m.normalized_form().to_string(),
+            })
+            .collect();
+        Ok(serde_wasm_bindgen::to_value(&result)?)
+    }
 }
 
 #[derive(Serialize, Deserialize)]
-pub struct MorphemeJs {
+pub struct Morpheme {
     pub surface: String,
     pub part_of_speech: Vec<String>,
     pub normalized_form: String,
 }
 
-// TODO: make it loadable from js (hopefully without copy)
 const SYSTEM_DICT_DATA: &[u8] = include_bytes!("../../sudachi.js/resources/system.dic");
 const CHARACTER_DEFINITION_DATA: &[u8] = include_bytes!("../../sudachi.js/resources/char.def");
 

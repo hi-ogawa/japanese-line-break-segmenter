@@ -1,7 +1,9 @@
 {
   "type": "module",
   "scripts": {
-    "build": "wasm-pack build --target web"
+    "dev": "wasm-pack build --target web --dev && npm run copy-pkg",
+    "build": "wasm-pack build --target web && npm run copy-pkg",
+    "copy-pkg": "cp -f pkg/sudachi_wasm.* pkg/sudachi_wasm_bg.wasm ."
   },
   "devDependencies": {
     "wasm-pack": "^0.10.3"
