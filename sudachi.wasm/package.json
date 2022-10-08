@@ -5,7 +5,8 @@
     "dev:embed": "npm run wasm-pack -- --dev --features embed_dictionary && npm run copy-pkg",
     "build": "npm run wasm-pack && npm run copy-pkg",
     "wasm-pack": "wasm-pack build --target web",
-    "copy-pkg": "cp -f pkg/sudachi_wasm.* pkg/sudachi_wasm_bg.wasm ."
+    "copy-pkg": "cp -f pkg/sudachi_wasm.* pkg/sudachi_wasm_bg.wasm .",
+    "test": "bash test.sh"
   },
   "devDependencies": {
     "wasm-pack": "^0.10.3"

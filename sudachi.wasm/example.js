@@ -26,7 +26,7 @@ async function main() {
   // tokenize
   const tokenizer = Tokenizer.create(dictionary);
   const morphemes = tokenizer.run(input, "C");
-  console.log(morphemes);
+  console.log(JSON.stringify(morphemes, null, 2));
 }
 
 main();

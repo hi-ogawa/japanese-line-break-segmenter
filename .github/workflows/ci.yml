@@ -63,3 +63,6 @@ jobs:
       # build
       - run: npm -C sudachi.wasm ci
       - run: npm -C sudachi.wasm run build
+      # test
+      - run: cd sudachi.rs && ./fetch_dictionary.sh
+      - run: npm -C sudachi.wasm run test
