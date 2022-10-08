@@ -3,5 +3,5 @@ dist
 target
 pkg
 .vercel
-sudachi
+sudachi.rs
 pnpm-lock.yaml

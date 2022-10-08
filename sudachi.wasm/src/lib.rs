@@ -18,7 +18,7 @@ const DTS_EXTRA: &'static str = r#"
 
 export class Tokenizer {
     free(): void;
-    static create(): Tokenizer;
+    static create(dictionary?: Uint8Array): Tokenizer;
     run(input: string, mode?: "A" | "B" | "C"): Morpheme[];
 }
 
@@ -37,11 +37,16 @@ pub struct Tokenizer {
 
 #[wasm_bindgen]
 impl Tokenizer {
-    // TODO: receive dictionary data externally
     #[wasm_bindgen]
-    pub fn create() -> Result<Tokenizer, JsValue> {
-        // initialize dictionary
-        let dict = create_dictionary().map_err(serde_wasm_bindgen::Error::new)?;
+    pub fn create(dict_data: Option<Box<[u8]>>) -> Result<Tokenizer, JsValue> {
+        let storage = match dict_data {
+            Some(slice) => Storage::Owned(slice.into_vec()),
+            None => {
+                // TODO: throw if no embeded dictionary build
+                Storage::Borrowed(SYSTEM_DICT_DATA)
+            }
+        };
+        let dict = create_dictionary(storage).map_err(serde_wasm_bindgen::Error::new)?;
         Ok(Self { dict })
     }
 
@@ -78,13 +83,14 @@ pub struct Morpheme {
     pub normalized_form: String,
 }
 
+// TODO: add feature flag for non-emebeded dictionary build
 const SYSTEM_DICT_DATA: &[u8] = include_bytes!("../../sudachi.js/resources/system.dic");
 const CHARACTER_DEFINITION_DATA: &[u8] = include_bytes!("../../sudachi.js/resources/char.def");
 
 // create dictionary without accessing file system
-fn create_dictionary() -> Result<JapaneseDictionary, SudachiError> {
-    let storage = SudachiDicData::new(Storage::Borrowed(SYSTEM_DICT_DATA));
-    let dict_data = unsafe { storage.system_static_slice() }; // get along with sudachi.rs's borrow hack
+fn create_dictionary(storage: Storage) -> Result<JapaneseDictionary, SudachiError> {
+    let sudachi_dic_data = SudachiDicData::new(storage);
+    let dict_data = unsafe { sudachi_dic_data.system_static_slice() }; // get along with sudachi.rs's borrow hack
     let character_category_data = CHARACTER_DEFINITION_DATA;
 
     // https://github.com/hi-ogawa/sudachi.rs/blob/f24627e74e79f597e3596cd148567c968cfa0230/sudachi/src/dic/mod.rs#L55
@@ -132,7 +138,7 @@ fn create_dictionary() -> Result<JapaneseDictionary, SudachiError> {
     }
 
     let dict = JapaneseDictionary {
-        storage,
+        storage: sudachi_dic_data,
         plugins,
         _grammar: loaeded_dictionary.grammar,
         _lexicon: loaeded_dictionary.lexicon_set,
