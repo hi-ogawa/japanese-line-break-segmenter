@@ -16,7 +16,7 @@ jobs:
       - run: npm run lint:check
       - run: npm run tsc
 
-  build/napi:
+  build-napi:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
       - run: npm run build
 
   # based on https://github.com/rustwasm/wasm-pack/blob/10f30be713f03eae68df21b34a220c03b45d871f/.github/workflows/test.yml
-  build/wasm:
+  build-wasm:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
