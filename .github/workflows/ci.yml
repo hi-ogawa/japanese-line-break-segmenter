@@ -61,5 +61,5 @@ jobs:
             sudachi.wasm/target
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('sudachi.wasm/Cargo.lock') }}
       # build
-      - run: npm ci
-      - run: npm run build
+      - run: npm -C sudachi.wasm ci
+      - run: npm -C sudachi.wasm run build
