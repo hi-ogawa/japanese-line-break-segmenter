@@ -1,8 +1,10 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "wasm-pack build --target web --dev && npm run copy-pkg",
-    "build": "wasm-pack build --target web && npm run copy-pkg",
+    "dev": "npm run wasm-pack -- --dev && npm run copy-pkg",
+    "dev:embed": "npm run wasm-pack -- --dev --features embed_dictionary && npm run copy-pkg",
+    "build": "npm run wasm-pack && npm run copy-pkg",
+    "wasm-pack": "wasm-pack build --target web",
     "copy-pkg": "cp -f pkg/sudachi_wasm.* pkg/sudachi_wasm_bg.wasm ."
   },
   "devDependencies": {

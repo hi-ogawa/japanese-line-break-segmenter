@@ -4,9 +4,11 @@
 # build
 npm i
 npm run dev
+SUDACHI_WASM_EMBED_DICTIONARY=../../sudachi.rs/resources/system.dic npm run dev:embed
 
 # example
-node example.js テクノロジーの力であらゆる投資判断を支援する
+node example.js テクノロジーの力であらゆる投資判断を支援する # throws without "embed_dictionary" feature
+node example.js テクノロジーの力であらゆる投資判断を支援する ../sudachi.rs/resources/system.dic
 ```
 
 <details>

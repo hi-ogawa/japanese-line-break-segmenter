@@ -18,7 +18,7 @@ const DTS_EXTRA: &'static str = r#"
 
 export class Tokenizer {
     free(): void;
-    static create(dictionary?: Uint8Array): Tokenizer;
+    static create(dict_data?: Uint8Array): Tokenizer;
     run(input: string, mode?: "A" | "B" | "C"): Morpheme[];
 }
 
@@ -42,8 +42,17 @@ impl Tokenizer {
         let storage = match dict_data {
             Some(slice) => Storage::Owned(slice.into_vec()),
             None => {
-                // TODO: throw if no embeded dictionary build
-                Storage::Borrowed(SYSTEM_DICT_DATA)
+                #[cfg(feature = "embed_dictionary")]
+                {
+                    Storage::Borrowed(include_bytes!(env!("SUDACHI_WASM_EMBED_DICTIONARY")))
+                }
+
+                #[cfg(not(feature = "embed_dictionary"))]
+                {
+                    Err(serde_wasm_bindgen::Error::new(
+                        "requires 'dict_data' when built without 'embed_dictionary' feature",
+                    ))?
+                }
             }
         };
         let dict = create_dictionary(storage).map_err(serde_wasm_bindgen::Error::new)?;
@@ -83,15 +92,11 @@ pub struct Morpheme {
     pub normalized_form: String,
 }
 
-// TODO: add feature flag for non-emebeded dictionary build
-const SYSTEM_DICT_DATA: &[u8] = include_bytes!("../../sudachi.js/resources/system.dic");
-const CHARACTER_DEFINITION_DATA: &[u8] = include_bytes!("../../sudachi.js/resources/char.def");
-
 // create dictionary without accessing file system
 fn create_dictionary(storage: Storage) -> Result<JapaneseDictionary, SudachiError> {
     let sudachi_dic_data = SudachiDicData::new(storage);
     let dict_data = unsafe { sudachi_dic_data.system_static_slice() }; // get along with sudachi.rs's borrow hack
-    let character_category_data = CHARACTER_DEFINITION_DATA;
+    let character_category_data: &[u8] = include_bytes!("../../sudachi.rs/resources/char.def");
 
     // https://github.com/hi-ogawa/sudachi.rs/blob/f24627e74e79f597e3596cd148567c968cfa0230/sudachi/src/dic/mod.rs#L55
     let mut loaeded_dictionary = {
